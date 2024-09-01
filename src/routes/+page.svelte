@@ -53,7 +53,22 @@
 		}
 	};
 
+	const remaining = () => {
+		return todos.filter((todo) => todo.done).length;
+	};
+
 	let filteredTodos = $derived(filterTodos());
+
+	$effect(() => {
+		const savedTodos = localStorage.getItem('todos');
+		if (savedTodos) {
+			todos = JSON.parse(savedTodos);
+		}
+	});
+
+	$effect(() => {
+		localStorage.setItem('todos', JSON.stringify(todos));
+	});
 </script>
 
 <ul class="todos">
@@ -78,4 +93,5 @@
 		<button onclick={() => setFilter('done')} class="todos__filter_button">Done</button>
 		<button onclick={() => setFilter('in work')} class="todos__filter_button">In work</button>
 	</div>
+	<p>{remaining()} remaining</p>
 </ul>
