@@ -54,6 +54,17 @@ button {
   background-color: inherit;
 }
 
+@keyframes fade {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
 
 .todos {
   margin-top: 10%;
@@ -71,6 +82,8 @@ button {
     background-color: black;
     color: white;
     font-size: 25px;
+    animation: fade 1s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
     >input {
       background-color: black;
@@ -122,5 +135,31 @@ button {
       font-size: 16px;
       color: #333;
     }
+  }
+
+  .todos__filter {
+    display: flex;
+    width: 400px;
+    gap: 10px;
+    justify-content: space-between;
+
+    .todos__filter_button {
+      background: black;
+      border-radius: 12px;
+      padding: 10px 12px;
+      width: 120px;
+      color: white;
+      font-size: 30px;
+      transform: scale(1);
+      transition: transform 0.1s ease-in;
+
+      &:hover {
+
+        transform: scale(0.97);
+        transition: transform 0.2s ease-in;
+      }
+
+    }
+
   }
 }
