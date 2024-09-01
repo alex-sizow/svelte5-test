@@ -1,12 +1,8 @@
 <script>
 	import { text } from '@sveltejs/kit';
 
-	let todos = $state([
-		{ text: 'Eat bread!', done: false },
-		{ text: 'Drink milk!', done: false },
-		{ text: 'Not eat!!!!', done: false }
-	]);
-	let filter = $state('all');
+	let todos = $state([]);
+	let filter = $state('in work');
 
 	const addTodo = (event) => {
 		if (event.key !== 'Enter') {
@@ -16,7 +12,7 @@
 		const todoText = event.target.value;
 		const id = window.crypto.randomUUID('dfgdg');
 
-		const todo = { text: todoText, done: false };
+		const todo = { text: todoText, done: false, id: id };
 
 		todos = [...todos, todo];
 
@@ -32,7 +28,14 @@
 	const toggleTodo = (event) => {
 		const todoEl = event.target;
 		const index = todoEl.dataset.index;
-		todos[index].done = !todos[index].done;
+
+		// Найти элемент с соответствующим id
+		const todo = todos.find((todo) => todo.id === index);
+
+		// Если элемент найден, изменить его свойство done
+		if (todo) {
+			todo.done = !todo.done;
+		}
 	};
 
 	const setFilter = (type) => {
@@ -72,13 +75,13 @@
 </script>
 
 <ul class="todos">
-	{#each filteredTodos as todo, i}
+	{#each filteredTodos as todo}
 		<li class="todos__item">
-			<input oninput={editTodo} data-index={i} value={todo.text} type="text" />
+			<input oninput={editTodo} data-index={todo.id} value={todo.text} type="text" />
 			<input
 				checked={todo.done}
 				onchange={toggleTodo}
-				data-index={i}
+				data-index={todo.id}
 				value={todo.done}
 				type="checkbox"
 			/>
