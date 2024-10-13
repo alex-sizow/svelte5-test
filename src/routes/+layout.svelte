@@ -1,7 +1,7 @@
 <header>
 	<h1><a href="/">Webduck</a></h1>
 	<nav>
-		<a href="/shop">Shopping cart</a>
+		<a href="/blog">Blog</a>
 		<a href="/todo">Todo</a>
 	</nav>
 </header>
