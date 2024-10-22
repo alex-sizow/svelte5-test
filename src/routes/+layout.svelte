@@ -3,6 +3,7 @@
 	<nav>
 		<a href="/blog">Blog</a>
 		<a href="/todo">Todo</a>
+		<a href="/flight-booker">flight booker</a>
 	</nav>
 </header>
 
