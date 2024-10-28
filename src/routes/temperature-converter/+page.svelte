@@ -18,6 +18,7 @@
 		color: white;
 		margin-top: 100px;
 		margin-bottom: 20px;
+		font-family: Arial, sans-serif;
 	}
 	section {
 		display: flex;
@@ -26,6 +27,7 @@
 		gap: 20px;
 		font-size: 34px;
 		color: white;
+		font-family: Arial, sans-serif;
 
 		span {
 			padding-top: 1px;
