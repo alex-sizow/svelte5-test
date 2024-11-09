@@ -1,12 +1,34 @@
 <script>
-	let c = $state(0);
-	let f = $state(0);
+	class Temperature {
+		#c = $state(0);
+		#f = $state(0);
+
+		get c() {
+			return this.#c;
+		}
+
+		set c(c) {
+			this.#c = c;
+			this.#f = c * (9 / 5) + 32;
+		}
+
+		get f() {
+			return this.#f;
+		}
+
+		set f(f) {
+			this.#f = f;
+			this.#c = (f - 32) * (5 / 9);
+		}
+	}
+
+	const temperature = new Temperature();
 </script>
 
 <h1>Temperature converter</h1>
 <section>
-	<input type="number" bind:value={c} /> Celsius <span>=</span>
-	<input type="number" bind:value={f} />Fahrenheit
+	<input type="number" bind:value={temperature.c} /> Celsius <span>=</span>
+	<input type="number" bind:value={temperature.f} />Fahrenheit
 </section>
 
 <style scoped>
