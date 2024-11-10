@@ -1,47 +1,40 @@
-<script>
-	import { onMount } from 'svelte';
+<script lang="ts">
+	let selected = $state('one-way');
 
-	let flightType = 'one-way';
-	let startDate = '';
-	let returnDate = '';
-	let isReturnDisabled = true;
+	let startDate = $state();
+	let returnDate = $state();
 
-	onMount(() => {
-		startDate = new Date().toISOString().split('T')[0];
-	});
-
-	function handleFlightTypeChange(event) {
-		flightType = event.target.value;
-		isReturnDisabled = flightType === 'one-way';
-		if (isReturnDisabled) {
-			returnDate = '';
-		}
-	}
+	const handleSubmit = (e) => {};
 </script>
 
-<h1>Flight Booker</h1>
-<section>
-	<label>
-		<span>Flight Type:</span>
-		<select bind:value={flightType} on:change={handleFlightTypeChange}>
-			<option value="one-way">One-way</option>
-			<option value="round-trip">Round-trip</option>
-		</select>
-	</label>
+<form onsubmit={handleSubmit}>
+	<h1>Flight Booker</h1>
+	<section>
+		<label>
+			<span>Flight Type:</span>
+			<select bind:value={selected} required>
+				<option value="one-way">One-way</option>
+				<option value="round-trip">Round-trip</option>
+			</select>
+		</label>
 
-	<label>
-		<span>Start Date:</span>
-		<input type="date" bind:value={startDate} />
-	</label>
+		<label>
+			<span>Start Date:</span>
+			<input type="date" bind:value={startDate} required />
+		</label>
 
-	<label>
-		<span>Return Date:</span>
-		<input type="date" bind:value={returnDate} disabled={isReturnDisabled} />
-	</label>
-</section>
+		<label>
+			<span>Return Date:</span>
+			<input type="date" bind:value={returnDate} required />
+		</label>
+	</section>
+
+	<button type="submit">Book</button>
+</form>
 
 <style>
 	h1 {
+		margin: 20px;
 		text-align: center;
 		font-size: 2rem;
 		margin-bottom: 1rem;
@@ -66,7 +59,17 @@
 
 	input,
 	select {
-		padding: 0.5rem;
+		border-radius: 20px;
+		padding: 0.8rem;
 		font-size: 1rem;
+	}
+
+	button {
+		display: flex;
+		margin: 20px auto;
+		border: 2px solid aqua;
+		border-radius: 15px;
+		padding: 10px 18px;
+		font-size: 20px;
 	}
 </style>
