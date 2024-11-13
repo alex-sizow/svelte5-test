@@ -1,8 +1,21 @@
 <script lang="ts">
 	let selected = $state('one-way');
 
-	let startDate = $state();
-	let returnDate = $state();
+	const getDate = () => {
+		const date = new Date();
+		const [month, day, year] = date
+			.toLocaleDateString('fr-FR', {
+				year: 'numeric',
+				month: '2-digit',
+				day: '2-digit'
+			})
+			.split('/');
+
+		return `${year}-${month}-${day}`;
+	};
+
+	let startDate = $state(getDate());
+	let returnDate = $state(getDate());
 
 	const handleSubmit = (e) => {};
 </script>
@@ -20,12 +33,18 @@
 
 		<label>
 			<span>Start Date:</span>
-			<input type="date" bind:value={startDate} required />
+			<input type="date" bind:value={startDate} min={getDate()} required />
 		</label>
 
 		<label>
 			<span>Return Date:</span>
-			<input type="date" bind:value={returnDate} required />
+			<input
+				type="date"
+				bind:value={returnDate}
+				min={getDate()}
+				disabled={!startDate || (selected === 'return' && returnDate < startDate)}
+				required
+			/>
 		</label>
 	</section>
 
@@ -62,8 +81,12 @@
 		border-radius: 20px;
 		padding: 0.8rem;
 		font-size: 1rem;
+		color: black;
 	}
 
+	input[disabled] {
+		border: 4px solid red;
+	}
 	button {
 		display: flex;
 		margin: 20px auto;
