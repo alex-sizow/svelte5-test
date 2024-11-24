@@ -5,6 +5,7 @@
 		<a href="/todo">Todo</a>
 		<a href="/flight-booker">Flight booker</a>
 		<a href="/temperature-converter">Temp. converter</a>
+		<a href="/circle-drawer">C. Drawer</a>
 	</nav>
 </header>
 
